@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% set active_page = "blog" %}
+{% block title %}Profile - olirowan{% endblock %}
+
+{% block app_content %}
+
+    <div class="container post-text">
+        <div class="row">
+
+            <div class="col-md-4">
+                <h3><a href="{{ url_for('user', username=user.username) }}">/{{ user.username }}</a></h3>
+                <table class="table table-hover">
+                    <tr>
+                        <td width="256px"><img src="{{ user.avatar(256) }}"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+
+                            {% if user.last_seen %}
+                                <p>Seen {{ moment(user.last_seen, local=true).fromNow() }}</p>
+                            {% endif %}
+
+                            <p>Followers: {{ user.followers.count() }}</p>
+                            <p>Following: {{ user.followed.count() }}</p>
+
+                            {% if user == current_user %}
+                                <p><a href="{{ url_for('edit_profile') }}">Edit profile</a></p>
+                            {% elif not current_user.is_following(user) %}
+                                <p><a href="{{ url_for('follow', username=user.username) }}">Follow</a></p>
+                            {% else %}
+                                <p><a href="{{ url_for('unfollow', username=user.username) }}">Unfollow</a></p>
+                            {% endif %}
+
+                        </td>
+                    </tr>
+                </table>
+
+                {% if form %}
+                    {{ wtf.quick_form(form) }}
+                    <br>
+                {% endif %}
+            </div>
+
+            <div class="col-md-6">
+                {% for post in posts %}
+                    {% include '_post.html' %}
+                {% endfor %}
+
+                <nav aria-label="...">
+                    <ul class="pager spaceme">
+                        <li class="previous{% if not prev_url %} disabled{% endif %}">
+                            <a href="{{ prev_url or '#' }}">
+                                <span aria-hidden="true">&larr;</span> Newer posts
+                            </a>
+                        </li>
+
+                        <li class="next{% if not next_url %} disabled{% endif %}">
+                            <a href="{{ next_url or '#' }}">
+                                Older posts <span aria-hidden="true">&rarr;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    {% block footer %}
+        {% include "footer.html" %}
+    {% endblock %}
+
+{% endblock %}
+
+
+
+

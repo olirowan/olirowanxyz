@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% set active_page = "about" %}
+{% block title %}About - olirowan{% endblock %}
+
+{% block app_content %}
+
+    <div class="container about-me">
+        <div class="row">
+
+            <div class="col-md-4">
+                <img src="{{ url_for('static', filename='images/olirock.jpg') }}"
+                     alt="olirowan"
+                     title="olirowan"
+                     class="img-thumbnail">
+            </div>
+
+            <div class="col-md-6 about-me-title">
+
+                <h2>olirowan</h2>
+
+                <br>
+
+                <p>
+                    I started making this site because I wanted to familiarise myself with
+                    full stack development. I wanted to create a web app so I could learn how to build an API, how to
+                    securely store user information, how to handle credentials and also so I could have a blog.
+                </p>
+
+            </div>
+        </div>
+
+        <hr class="separator1">
+
+        <div class="row">
+
+            <div class="col-md-6 col-md-offset-3">
+
+                <hr class="separator1">
+
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-5">
+
+                <h3></h3>
+
+                <p>
+                    This site is developed using the <a href="http://flask.pocoo.org/">Flask</a> micro web
+                    application
+                    framework, written in Python.
+                    The design is created using the <a href="https://getbootstrap.com/">Bootstrap</a> framework to
+                    manage the CSS.
+                    The back-end relies on the use of <a href="https://www.sqlalchemy.org/">SQLAlchemy</a>
+                    to allow for interaction between the application and the database.
+                    The SSL has been obtained for free from the <a href="https://letsencrypt.org/">Lets Encrypt</a>
+                    certificate authority.
+                </p>
+                <br>
+                <p>
+                    A lot of resources have carried the development of this site. Notably - the Flask tutorials written
+                    by
+                    <a href="https://blog.miguelgrinberg.com/">Miguel Grinberg</a> and
+                    <a href="http://charlesleifer.com/blog/how-to-make-a-flask-blog-in-one-hour-or-less/">Charles
+                        Leifer</a>.
+                    Also, the <a href="https://old.reddit.com/r/webdev/">/r/webdev</a> community, and the
+                    posts on the
+                    <a href="https://security.stackexchange.com/questions/tagged/web-application?sort=votes&pageSize=15">
+                        Security Stack Exchange
+                    </a> site have been a great source of information.
+                </p>
+
+            </div>
+
+            <div class="col-md-1">
+
+            </div>
+
+
+            <div class="col-md-5">
+
+                <h3><br/></h3>
+
+                <p>
+                    This site is being created with two aims in mind.
+                </p>
+                <p>
+                    The first is to have a personal blog, with the experience of building it along the way -
+                    rather than signing up to a blogging platform. This provides an insight into full stack
+                    development along with full control of the application.
+                </p>
+                <br>
+                <p>
+                    The second is to learn and implement best security practices across the site, from forcing HTTPS
+                    on all pages to handling user interaction securely. This means providing features that
+                    require user interaction such as the <a href="{{ url_for('notes') }}">/notes </a> aspect
+                    in order to learn how to manage and store credentials, sanitise user input, offer multi
+                    factor authentication, and minimise site vulnerabilities.
+                </p>
+
+            </div>
+        </div>
+
+        <hr class="separator1">
+
+    </div>
+
+    <div class="row">
+        <h1><br/></h1>
+        <hr class="separator1">
+    </div>
+
+    {% block footer %}
+        {% include "footer.html" %}
+    {% endblock %}
+
+{% endblock %}

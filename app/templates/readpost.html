@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% set active_page = "blog" %}
+
+{% block title %}Blog - olirowan{% endblock %}
+
+{% block app_content %}
+
+    <div class="container post-text">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+
+                {% block extra_header %}
+                    {% if session.logged_in %}
+                        <li><a href="{{ url_for('edit', slug=blogpost.slug) }}">Edit entry</a></li>
+                    {% endif %}
+                {% endblock %}
+
+                <p>Posted on {{ blogpost.timestamp.strftime('%A %d %B %Y - %H:%M') }}</p>
+                <hr class="separator1">
+
+                <div class="justify-content-center blog-post-text">
+
+                    <h2>{{ blogpost.title }}</h2>
+                    <hr class="separator1">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="justify-content-center">
+                    <div class="container post-text blog-post-text">
+                        {{ blogpost.html_content }}
+
+
+                        <hr class="separator1">
+                        <h1><br></h1>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% block footer %}
+        {% include "footer.html" %}
+    {% endblock %}
+
+{% endblock %}

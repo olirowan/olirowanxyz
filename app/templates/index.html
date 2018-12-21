@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% set active_page = "index" %}
+{% block title %}Home - olirowan{% endblock %}
+
+{% block app_content %}
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4">
+                <img src="{{ url_for('static', filename='images/olirock.jpg') }}"
+                     alt="olirowan"
+                     title="olirowan"
+                     class="img-thumbnail">
+            </div>
+
+            <div class="col-md-6 about-me-title about-me">
+
+                <h2>olirowan</h2>
+                <h1><br></h1>
+                <p>
+                    A blog about building a blog - and some other stuff.
+                </p>
+
+                <p>
+                    Read more on <a href="{{ url_for('about') }}">/about</a>
+                </p>
+
+            </div>
+        </div>
+        <hr class="separator1">
+
+        <div class="row">
+
+            <div class="col-md-6 blogposts">
+
+                <h1><br></h1>
+
+                <h2>Blog Posts</h2>
+                <hr class="separator1">
+
+                {% for entry in blogposts[:3] %}
+                    <h3>
+                        <a href="
+                                {% if entry.published %}{{ url_for('readpost', slug=entry.slug) }}{% else %}{{ url_for('editpost', slug=entry.slug) }}{% endif %}">
+                            {{ entry.title }}
+                        </a>
+                    </h3>
+                    <p>Posted {{ moment(entry.timestamp, local=true).fromNow() }}</p>
+
+                    <hr class="separator1">
+                {% endfor %}
+
+                <hr class="separator1">
+
+                <p>
+                    You can find more posts like these on <a href="{{ url_for('blog') }}">/blog </a>
+                </p>
+
+                <h3><br></h3>
+
+            </div>
+
+            <div class="col-md-1">
+
+            </div>
+
+            <div class="col-md-5 blogposts">
+
+                <h2>Notes</h2>
+                <hr class="separator1">
+
+                <p>
+                    The Notes aspect of this site exists so I can securely handle and store user account and post data.
+                </p>
+                <p>
+                    Users are also free to post their own notes, pages that revolve around this aspect requires users to
+                    login.
+                </p>
+                <p>
+                    Feel free to help me out by deciding to <a href="{{ url_for('register') }}">/register </a>
+                </p>
+
+                <h3><br></h3>
+
+            </div>
+        </div>
+
+        <h1><br></h1>
+
+    </div>
+
+    {% block footer %}
+        {% include "footer.html" %}
+    {% endblock %}
+
+{% endblock %}
