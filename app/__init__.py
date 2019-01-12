@@ -1,14 +1,15 @@
-import logging
-from logging.handlers import RotatingFileHandler
 import os
+import logging
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from config import Config
+from flask_mail import Mail
+from flask_moment import Moment
 from flask_migrate import Migrate
 from flask_login import LoginManager
-from flask_mail import Mail
 from flask_bootstrap import Bootstrap
-from config import Config
-from flask_moment import Moment
+from flask_sqlalchemy import SQLAlchemy
+from logging.handlers import RotatingFileHandler
+from apscheduler.schedulers.background import BackgroundScheduler
 
 
 app = Flask(__name__)
@@ -26,6 +27,7 @@ bootstrap = Bootstrap(app)
 moment = Moment(app)
 
 
+
 if not os.path.exists('logs'):
     os.mkdir('logs')
 
@@ -36,5 +38,8 @@ app.logger.addHandler(file_handler)
 
 app.logger.setLevel(logging.DEBUG)
 app.logger.info('STARTED olirowanxyz')
+
+task_schedule = BackgroundScheduler(daemon=True)
+task_schedule.start()
 
 from app import routes, models, errors

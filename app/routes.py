@@ -3,6 +3,7 @@ from datetime import datetime
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db
+from app.tasks import create_database_backup
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, ResetPasswordRequestForm, ResetPasswordForm
 from app.models import User, Post, BlogPost
 from app.email import send_password_reset_email
@@ -365,3 +366,16 @@ def drafts():
 
     else:
         return redirect(url_for('notes'))
+
+
+@app.route('/admin_panel/run_db_backup')
+@login_required
+def run_db_backup():
+    if (current_user.id) == app.config['BLOG_ADMIN_ID'] and (current_user.username) == app.config['BLOG_ADMIN_USER']:
+
+        create_database_backup()
+        flash('Initiated database backup.')
+        return redirect(url_for('admin_panel'))
+
+    else:
+        return redirect(url_for('user'))

@@ -10,13 +10,16 @@ class Config(object):
 
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
     BLOG_ADMIN_USER = os.environ.get('BLOG_ADMIN_USER')
     BLOG_ADMIN_ID = os.environ.get('BLOG_ADMIN_ID')
+
+    MYSQL_DB_NAME = os.environ.get('MYSQL_DB_NAME')
     MYSQL_BACKUP_USER = os.environ.get('MYSQL_BACKUP_USER')
     MYSQL_BACKUP_PASS = os.environ.get('MYSQL_BACKUP_PASS')
 
-    SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
     ADMINS = ['admin@olirowan.xyz']
+    SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 
     RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY')
     RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
@@ -26,5 +29,7 @@ class Config(object):
     SESSION_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_HTTPONLY = True
 
-    POSTS_PER_PAGE = 5
     SITE_WIDTH = 800
+    POSTS_PER_PAGE = 5
+
+    BACKUP_PATH = '/backup/'
