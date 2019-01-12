@@ -5,7 +5,7 @@ import pipes
 import pathlib
 
 backup_path = app.config['BACKUP_PATH']
-mysql_backup_db = app.config['MYSQL_BACKUP_DB']
+mysql_backup_db = app.config['MYSQL_DB_NAME']
 mysql_backup_user = app.config['MYSQL_BACKUP_USER']
 mysql_backup_pass = app.config['MYSQL_BACKUP_PASS']
 
