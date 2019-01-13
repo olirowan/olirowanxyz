@@ -280,6 +280,10 @@ def readpost(slug):
 @app.route('/admin_panel/', methods=['GET', 'POST'])
 @login_required
 def admin_panel():
+
+    app.logger.info("Admin Page Requested by ID: " + current_user.id + " userame: " + current_user.username)
+    app.logger.info("Credentials must match ID: " + app.config['BLOG_ADMIN_ID'] + " userame: " + app.config['BLOG_ADMIN_USER'])
+    
     if (current_user.id) == app.config['BLOG_ADMIN_ID'] and (current_user.username) == app.config['BLOG_ADMIN_USER']:
         query = BlogPost.drafts().order_by(BlogPost.timestamp.desc())
         return render_template('admin_panel.html', blogposts=query)
