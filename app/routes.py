@@ -285,7 +285,7 @@ def admin_panel():
         return render_template('admin_panel.html', blogposts=query)
 
     else:
-        return redirect(url_for('user', username=user.username))
+        return redirect(url_for('user', username=current_user.username))
 
 
 @app.route('/createpost/', methods=['GET', 'POST'])
@@ -378,4 +378,4 @@ def run_db_backup():
         return redirect(url_for('admin_panel'))
 
     else:
-        return redirect(url_for('user', username=user.username))
+        return redirect(url_for('user', username=current_user.username))
