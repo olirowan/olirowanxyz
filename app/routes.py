@@ -7,6 +7,7 @@ from app.tasks import create_database_backup
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, ResetPasswordRequestForm, ResetPasswordForm
 from app.models import User, Post, BlogPost
 from app.email import send_password_reset_email
+from app.validate_admin import validate_if_admin_user
 
 
 @app.before_request
@@ -280,11 +281,7 @@ def readpost(slug):
 @app.route('/admin_panel/', methods=['GET', 'POST'])
 @login_required
 def admin_panel():
-
-    app.logger.info("Admin Page Requested by ID: " + str(current_user.id) + " userame: " + current_user.username)
-    app.logger.info("Credentials must match ID: " + str(app.config['BLOG_ADMIN_ID']) + " userame: " + app.config['BLOG_ADMIN_USER'])
-
-    if str(current_user.id) == app.config['BLOG_ADMIN_ID'] and (current_user.username) == app.config['BLOG_ADMIN_USER']:
+    if validate_if_admin_user(current_user):
         query = BlogPost.drafts().order_by(BlogPost.timestamp.desc())
         return render_template('admin_panel.html', blogposts=query)
 
@@ -295,8 +292,7 @@ def admin_panel():
 @app.route('/createpost/', methods=['GET', 'POST'])
 @login_required
 def createpost():
-    if (current_user.id) == app.config['BLOG_ADMIN_ID'] and (current_user.username) == app.config['BLOG_ADMIN_USER']:
-
+    if validate_if_admin_user(current_user):
         method = 'INSERT'
         return _create_or_edit(BlogPost(title='', content=''), 'createpost.html', method)
 
@@ -307,8 +303,7 @@ def createpost():
 @app.route('/<slug>/editpost/', methods=['GET', 'POST'])
 @login_required
 def editpost(slug):
-    if (current_user.id) == app.config['BLOG_ADMIN_ID'] and (current_user.username) == app.config['BLOG_ADMIN_USER']:
-
+    if validate_if_admin_user(current_user):
         method = 'UPDATE'
         entry = BlogPost.drafts().filter_by(slug=slug).first_or_404()
         return _create_or_edit(entry, 'editpost.html', method)
@@ -363,8 +358,7 @@ def _create_or_edit(entry, template, method):
 @app.route('/drafts/')
 @login_required
 def drafts():
-    if (current_user.id) == app.config['BLOG_ADMIN_ID'] and (current_user.username) == app.config['BLOG_ADMIN_USER']:
-
+    if validate_if_admin_user(current_user):
         query = BlogPost.drafts().order_by(BlogPost.timestamp.desc())
         return render_template('blog.html', blogposts=query)
 
@@ -375,8 +369,7 @@ def drafts():
 @app.route('/admin_panel/run_db_backup')
 @login_required
 def run_db_backup():
-    if (current_user.id) == app.config['BLOG_ADMIN_ID'] and (current_user.username) == app.config['BLOG_ADMIN_USER']:
-
+    if validate_if_admin_user(current_user):
         create_database_backup()
         flash('Initiated database backup.')
         return redirect(url_for('admin_panel'))
