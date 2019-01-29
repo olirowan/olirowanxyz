@@ -1,8 +1,8 @@
-from app import app, task_schedule
 import os
 import time
 import pipes
 import pathlib
+from app import app, task_schedule
 
 backup_path = app.config['BACKUP_PATH']
 mysql_backup_db = app.config['MYSQL_DB_NAME']
@@ -16,8 +16,7 @@ def create_database_backup():
     db_backup_path = backup_path + '/database/' + backup_time + '/'
     pathlib.Path(db_backup_path).mkdir(parents=True, exist_ok=True)
 
-    app.logger.info("Starting database backup at :" + backup_time)
-
+    app.logger.info("Starting database backup at: " + backup_time)
     mysqldump_process = "mysqldump" + " -u " + mysql_backup_user + " -p" + mysql_backup_pass + " " + mysql_backup_db\
                         + " > " + pipes.quote(db_backup_path) + mysql_backup_db + ".sql"
     os.system(mysqldump_process)
@@ -26,4 +25,4 @@ def create_database_backup():
     os.system(compress_backup_process)
 
     backup_complete_time = time.strftime('%Y%m%d-%H%M%S')
-    app.logger.info("Completed database backup at  :" + backup_complete_time)
+    app.logger.info("Completed database backup at: " + backup_complete_time)

@@ -7,31 +7,30 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <img src="{{ url_for('static', filename='images/olirock.jpg') }}"
                      alt="olirowan"
                      title="olirowan"
                      class="img-thumbnail">
             </div>
 
-            <div class="col-md-6 about-me-title about-me">
-
+            <div class="col-md-5 about-me-title about-me">
+                <h2><br></h2>
                 <h2>olirowan</h2>
-                <h1><br></h1>
-                <p>
+                <h2><br></h2>
+                <p class="tagline">
                     A blog about building a blog - and some other stuff.
                 </p>
 
-                <p>
+                <p class="tagline">
                     Read more on <a href="{{ url_for('about') }}">/about</a>
                 </p>
-
             </div>
         </div>
         <hr class="separator1">
 
-        <div class="row">
 
+        <div class="row">
             <div class="col-md-6 blogposts">
 
                 <h1><br></h1>
@@ -41,8 +40,8 @@
 
                 {% for entry in blogposts[:3] %}
                     <h3>
-                        <a href="
-                                {% if entry.published %}{{ url_for('readpost', slug=entry.slug) }}{% else %}{{ url_for('editpost', slug=entry.slug) }}{% endif %}">
+                        <a href="{% if entry.published %}{{ url_for('readpost', slug=entry.slug) }}
+                            {% else %}{{ url_for('editpost', slug=entry.slug) }}{% endif %}">
                             {{ entry.title }}
                         </a>
                     </h3>
@@ -85,10 +84,119 @@
 
             </div>
         </div>
-
-        <h1><br></h1>
-
     </div>
+
+
+
+
+    <div id="about-text-container">
+        <div class="container">
+            <div class="row about-text-row">
+                <div class="col-md-6 col-md-offset-3">
+                    <h1><br></h1>
+                    <h2>About</h2>
+                    <hr class="separator1">
+
+                    <p>
+                        I started making this site because I wanted to familiarise myself with
+                        full stack development. I wanted to create a web application so I could learn how to build an
+                        API,
+                        how to
+                        securely store user information, how to handle credentials and also so I could have a blog to
+                        document it.
+                    </p>
+                    <h1><br></h1>
+                </div>
+            </div>
+
+            <div class="row about-text-row">
+                <div class="col-md-5">
+                    <h2><br></h2>
+                    <h2>Built With</h2>
+                    <hr class="separator1">
+
+                    <p>
+                        This site is developed using the <a href="http://flask.pocoo.org/">Flask</a> micro web
+                        application
+                        framework, written in Python.
+                        The design is created using the <a href="https://getbootstrap.com/">Bootstrap</a> framework to
+                        manage the CSS.
+                        The back-end relies on the use of <a href="https://www.sqlalchemy.org/">SQLAlchemy</a>
+                        to allow for interaction between the application and the database.
+                        The SSL has been obtained for free from the <a href="https://letsencrypt.org/">Lets Encrypt</a>
+                        certificate authority.
+                    </p>
+                    <br>
+                    <p>
+                        A lot of resources have carried the development of this site. Notably - the Flask tutorials
+                        written
+                        by
+                        <a href="https://blog.miguelgrinberg.com/">Miguel Grinberg</a> and
+                        <a href="http://charlesleifer.com/blog/how-to-make-a-flask-blog-in-one-hour-or-less/">Charles
+                            Leifer</a>.
+                        Also, the <a href="https://old.reddit.com/r/webdev/">/r/webdev</a> community, and the
+                        posts on the
+                        <a href="https://security.stackexchange.com/questions/tagged/web-application?sort=votes&pageSize=15">
+                            Security Stack Exchange
+                        </a> site have been a great source of information.
+                    </p>
+                </div>
+
+                <div class="col-md-1"></div>
+
+                <div class="col-md-5">
+                    <img src="{{ url_for('static', filename='images/olirock.jpg') }}"
+                         alt="olirowan"
+                         title="olirowan"
+                         class="img-thumbnail">
+                </div>
+
+            </div>
+            <h1><br></h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <h1><br></h1>
+                <img src="{{ url_for('static', filename='images/olirock.jpg') }}"
+                     alt="olirowan"
+                     title="olirowan"
+                     class="img-thumbnail">
+            </div>
+
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+                <h1><br></h1>
+                <h2><br></h2>
+                <h2>Built Because</h2>
+                <hr class="separator1">
+
+                <p>
+                    This site is being created with two aims in mind.
+                </p>
+                <p>
+                    The first is to have a personal blog, with the experience of building it along the way -
+                    rather than signing up to a blogging platform. This provides an insight into full stack
+                    development along with full control of the application.
+                </p>
+                <br>
+                <p>
+                    The second is to learn and implement best security practices across the site, from forcing HTTPS
+                    on all pages to handling user interaction securely. This means providing features that
+                    require user interaction such as the <a href="{{ url_for('notes') }}">/notes </a> aspect
+                    in order to learn how to manage and store credentials, sanitise user input, offer multi
+                    factor authentication, and minimise site vulnerabilities.
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <hr class="separator1">
+    <h1><br></h1>
+    <h1><br></h1>
+    <h1><br></h1>
 
     {% block footer %}
         {% include "footer.html" %}

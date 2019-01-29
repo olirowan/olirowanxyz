@@ -74,7 +74,6 @@ hr.separator1 {
     background-image: none;
     background-repeat: no-repeat;
     border: 0;
-    font-family: 'roboto', sans-serif;
     font-size: 16px;
     text-decoration: none;
     text-transform: lowercase;
@@ -90,7 +89,6 @@ hr.separator1 {
     background-image: none;
     background-repeat: no-repeat;
     border: 0;
-    font-family: 'arial', sans-serif;
     font-size: 16px;
     text-decoration: none;
     text-transform: lowercase;
@@ -203,7 +201,6 @@ ul.sf-menu li li li:hover ul, ul.sf-menu li li li.sfHover ul {
 }
 
 .sf-menu li a {
-    font-family: 'arial', sans-serif;
     font-size: 16px;
     padding: 50px 5px 10px 10px;
     text-decoration: none;
@@ -578,12 +575,6 @@ label.form-check-label {
     text-align: left;
 }
 
-.about-me-title h1 {
-    text-align: left;
-    margin-bottom: 5px;
-    font-size: 35px;
-}
-
 .about-me p {
     line-height: 25px;
     text-align: justify;
@@ -609,6 +600,7 @@ label.form-check-label {
     vertical-align: bottom;
     text-align: center;
     margin-right: 4px;
+    color: #fbe6cb;
 }
 
 .socials li ul {
@@ -1027,93 +1019,6 @@ aside {
     padding: 0 20px 20px 20px;
 }
 
-/* #Tabs (activate in tabs.js)
-================================================== */
-ul.tabs {
-    display: block;
-    margin: 0 0 4px 0;
-}
-
-ul.tabs li {
-    width: auto;
-    height: 18px;
-    padding: 0;
-    float: left;
-    margin: 0 5px 0 0;
-}
-
-ul.tabs li a {
-    text-decoration: none;
-    width: auto;
-    padding: 5px;
-    margin: 0;
-    color: #543d1f;
-    background: url(../images/bg/lightpaperfibers.png) repeat;
-    -webkit-border-top-left-radius: 5px;
-    -webkit-border-top-right-radius: 5px;
-    -moz-border-radius-topleft: 5px;
-    -moz-border-radius-topright: 5px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-
-ul.tabs li a.active {
-    background: #543d1f;
-    position: relative;
-    color: #fff;
-}
-
-ul.tabs li:first-child a.active {
-    margin-left: 0;
-}
-
-ul.tabs-content {
-    display: block;
-    background: #e2d3c1 url(../images/rausch.png) repeat;
-    padding: 20px 10px 5px 10px;
-    -webkit-border-bottom-right-radius: 5px;
-    -webkit-border-bottom-left-radius: 5px;
-    -moz-border-radius-bottomright: 5px;
-    -moz-border-radius-bottomleft: 5px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-}
-
-ul.tabs-content > li {
-    display: none;
-}
-
-ul.tabs-content > li.active {
-    display: block;
-}
-
-ul.tabs:before, ul.tabs:after {
-    content: '\0020';
-    display: block;
-    overflow: hidden;
-    visibility: hidden;
-    width: 0;
-    height: 0;
-}
-
-ul.tabs:after {
-    clear: both;
-}
-
-ul.tabs {
-    zoom: 1;
-}
-
-ul.categories li {
-    display: inline-block;
-}
-
-ul.categories li a {
-    display: inline-block;
-    background: #e2d3c1 url(../images/rausch.png) repeat;
-    padding: 5px;
-    color: #543d1f;
-}
 
 /******************************* FEATURES / Resume  *******************************/
 
