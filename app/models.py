@@ -128,6 +128,7 @@ class Post(db.Model):
 class BlogPost(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title  = db.Column(db.String(150))
+    icon  = db.Column(db.String(50))
     slug = db.Column(db.String(200), unique=True)
     content = db.Column(db.Text)
     published = db.Column(db.Boolean, index=True)
