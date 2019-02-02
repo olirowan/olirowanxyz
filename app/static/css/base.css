@@ -68,6 +68,9 @@ body {
     Orignal
     FDFDFD
 
+    Also for future ref, gradient style is:
+    backgound: linear-gradient(57deg, #4E8DE5 48%, #fffffc 48%);
+
     */
 }
 
@@ -326,6 +329,10 @@ select {
     padding-left: 15px;
 }
 
+.header-logo {
+    padding-bottom: 10px;
+}
+
 /* #Misc
 ================================================== */
 .remove-bottom {
@@ -353,15 +360,4 @@ select {
 
 #about-text-container {
     background: #4e8de5 url(../images/rausch.png) repeat;
-}
-
-/* # Equal height columns for blogposts and icons
-================================================== */
-
-.row-eq-height {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    flex-wrap: wrap;
 }

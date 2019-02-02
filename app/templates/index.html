@@ -61,16 +61,17 @@
         <p>
             You can find more posts like these on <a href="{{ url_for('blog') }}">/blog </a>
         </p>
+        <h3><br></h3>
     </div>
 
-    <h3><br></h3>
+
 
     <div id="about-text-container">
         <div class="container">
+            <h1><br></h1>
+            <hr class="separator1">
             <div class="row about-text-row about-text-yellow">
                 <div class="col-md-5">
-                    <h1><br></h1>
-                    <h2><br></h2>
                     <h2>Built Because</h2>
                     <hr class="separator1">
                     <p>
@@ -99,64 +100,66 @@
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-5">
-                    <h1><br></h1>
                     <img src="{{ url_for('static', filename='images/olirock.jpg') }}"
                          alt="olirowan"
                          title="olirowan"
                          class="img-thumbnail">
                 </div>
             </div>
+            <hr class="separator1">
+            <h1><br></h1>
         </div>
+    </div>
+
+    <div id="home-white-container">
+        <h1><br></h1>
+        <div class="container">
+            <hr class="separator1">
+            <div class="row about-text-row">
+                <div class="col-md-5">
+                    <img src="{{ url_for('static', filename='images/olirock.jpg') }}"
+                         alt="olirowan"
+                         title="olirowan"
+                         class="img-thumbnail">
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <h2><br></h2>
+                    <h2>Built With</h2>
+                    <hr class="separator1">
+
+                    <p>
+                        This site is developed using the <a href="http://flask.pocoo.org/">Flask</a> micro web
+                        application
+                        framework, written in Python.
+                        The design is created using the <a href="https://getbootstrap.com/">Bootstrap</a> framework to
+                        manage the CSS.
+                        The back-end relies on the use of <a href="https://www.sqlalchemy.org/">SQLAlchemy</a>
+                        to allow for interaction between the application and the database.
+                        The SSL has been obtained for free from the <a href="https://letsencrypt.org/">Lets Encrypt</a>
+                        certificate authority.
+                    </p>
+                    <br>
+                    <p>
+                        A lot of resources have carried the development of this site. Notably - the Flask tutorials
+                        written
+                        by
+                        <a href="https://blog.miguelgrinberg.com/">Miguel Grinberg</a> and
+                        <a href="http://charlesleifer.com/blog/how-to-make-a-flask-blog-in-one-hour-or-less/">Charles
+                            Leifer</a>.
+                        Also, the <a href="https://old.reddit.com/r/webdev/">/r/webdev</a> community, and the
+                        posts on the
+                        <a href="https://security.stackexchange.com/questions/tagged/web-application?sort=votes&pageSize=15">
+                            Security Stack Exchange
+                        </a> site have been a great source of information.
+                    </p>
+                    <h1><br></h1>
+                </div>
+            </div>
+        </div>
+        <hr class="separator1">
         <h1><br></h1>
     </div>
-
-    <h1><br></h1>
-    <hr class="separator1">
-    <div class="container">
-        <div class="row about-text-row">
-            <div class="col-md-5">
-                <img src="{{ url_for('static', filename='images/olirock.jpg') }}"
-                     alt="olirowan"
-                     title="olirowan"
-                     class="img-thumbnail">
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-5">
-                <h2><br></h2>
-                <h2>Built With</h2>
-                <hr class="separator1">
-
-                <p>
-                    This site is developed using the <a href="http://flask.pocoo.org/">Flask</a> micro web
-                    application
-                    framework, written in Python.
-                    The design is created using the <a href="https://getbootstrap.com/">Bootstrap</a> framework to
-                    manage the CSS.
-                    The back-end relies on the use of <a href="https://www.sqlalchemy.org/">SQLAlchemy</a>
-                    to allow for interaction between the application and the database.
-                    The SSL has been obtained for free from the <a href="https://letsencrypt.org/">Lets Encrypt</a>
-                    certificate authority.
-                </p>
-                <br>
-                <p>
-                    A lot of resources have carried the development of this site. Notably - the Flask tutorials
-                    written
-                    by
-                    <a href="https://blog.miguelgrinberg.com/">Miguel Grinberg</a> and
-                    <a href="http://charlesleifer.com/blog/how-to-make-a-flask-blog-in-one-hour-or-less/">Charles
-                        Leifer</a>.
-                    Also, the <a href="https://old.reddit.com/r/webdev/">/r/webdev</a> community, and the
-                    posts on the
-                    <a href="https://security.stackexchange.com/questions/tagged/web-application?sort=votes&pageSize=15">
-                        Security Stack Exchange
-                    </a> site have been a great source of information.
-                </p>
-                <h1><br></h1>
-            </div>
-        </div>
-    </div>
-    <hr class="separator1">
-    <h1><br></h1>
 
     <h1><br></h1>
     {% block footer %}
