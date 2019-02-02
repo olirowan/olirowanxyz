@@ -72,30 +72,21 @@
             <hr class="separator1">
             <div class="row about-text-row about-text-yellow">
                 <div class="col-md-5">
-                    <h2>Built Because</h2>
+                    <h2><br></h2>
+                    <h2> I wanted to build a blog more than I actually wanted to write a blog.</h2>
                     <hr class="separator1">
+                    <br>
                     <p>
-                        This site is being created with two aims in mind.
-                    </p>
-                    <p>
-                        The first is to have a personal blog, with the experience of building it along the way -
-                        rather than signing up to a blogging platform. This provides an insight into full stack
-                        development along with full control of the application.
-
-                        I started making this site because I wanted to familiarise myself with
-                        full stack development. I wanted to create a web application so I could learn how to build an
-                        API,
-                        how to
-                        securely store user information, how to handle credentials and also so I could have a blog to
-                        document it.
+                        The original aim was to find a project where I would be able to implement best security
+                        practices while getting some familiarity with full stack development. This required a platform
+                        that I could build where users could sign up and interact with something - like a simple blog site.
                     </p>
                     <br>
                     <p>
-                        The second is to learn and implement best security practices across the site, from forcing HTTPS
-                        on all pages to handling user interaction securely. This means providing features that
-                        require user interaction such as the <a href="{{ url_for('notes') }}">/notes </a> aspect
-                        in order to learn how to manage and store credentials, sanitise user input, offer multi
-                        factor authentication, and minimise site vulnerabilities.
+                        The problem was that I didn't have anything to write about. Eventually I thought it would be a
+                        good idea to get the site to a fairly stable state and publish it. Then I could continue it's
+                        development whilst documenting the changes along the way - providing the content for
+                        blog posts.
                     </p>
                 </div>
                 <div class="col-md-1"></div>
@@ -117,7 +108,7 @@
             <hr class="separator1">
             <div class="row about-text-row">
                 <div class="col-md-5">
-                    <img src="{{ url_for('static', filename='images/olirock.jpg') }}"
+                    <img src="{{ url_for('static', filename='images/monkey.jpg') }}"
                          alt="olirowan"
                          title="olirowan"
                          class="img-thumbnail">
@@ -129,11 +120,21 @@
                     <hr class="separator1">
 
                     <p>
-                        This site is developed using the <a href="http://flask.pocoo.org/">Flask</a> micro web
-                        application
-                        framework, written in Python.
-                        The design is created using the <a href="https://getbootstrap.com/">Bootstrap</a> framework to
-                        manage the CSS.
+                        This site is developed using <a href="http://flask.pocoo.org/">Flask</a>.
+                    </p>
+                    <p>
+                        A micro web application framework written in Python.
+                    </p>
+                    <p>
+                        The design is created using the <a href="https://getbootstrap.com/">Bootstrap</a> framework.
+                    </p>
+                    <p>
+                        The icons used throughout the site have been obtained from
+                        <a href="https://www.freepik.com/">freepik</a>
+                        and
+                        <a href="https://fontawesome.com/">Font Awesome</a>.
+                    </p>
+                    <p>
                         The back-end relies on the use of <a href="https://www.sqlalchemy.org/">SQLAlchemy</a>
                         to allow for interaction between the application and the database.
                         The SSL has been obtained for free from the <a href="https://letsencrypt.org/">Lets Encrypt</a>
