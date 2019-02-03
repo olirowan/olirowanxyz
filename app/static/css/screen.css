@@ -457,7 +457,6 @@ li a#visited {
 .usermenu {
     border-bottom: #ddd solid 1px;
     height: 45px;
-    margin-bottom: 10px;
 }
 
 .user-menu li {
@@ -594,6 +593,22 @@ label.form-check-label {
     overflow: hidden;
     width: 100%;
     max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 3px;
+    height: 70px;
+    background: #73A6ED url(../images/rausch.png) repeat;
+}
+
+.pagefooter p {
+    color: #f9efe3;
+    text-shadow: none;
+    font-size: 12px;
+}
+
+.pagefooter h3 {
+    color: #fbe6cb;
+    font-size: 16px;
 }
 
 .socials {
@@ -613,25 +628,6 @@ label.form-check-label {
 
 .spaceme {
     padding-bottom: 60px;
-}
-
-.footer {
-    background: #73A6ED url(../images/rausch.png) repeat;
-    padding-top: 3px;
-    padding-left: 0;
-    padding-right: 0;
-    height: 70px;
-}
-
-.footer p {
-    color: #f9efe3;
-    text-shadow: none;
-    font-size: 12px;
-}
-
-.footer h3 {
-    color: #fbe6cb;
-    font-size: 16px;
 }
 
 #tweets ul {
@@ -1181,24 +1177,34 @@ aside {
         width: 100%;
         margin-top: 13px;
     }
+
+    .tagline {
+        color: #FFFFFF;
+        font-size: 20px;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 993px) {
     .col-md-4 {
         max-width: 80%;
     }
+
     .col-md-5 {
         max-width: 80%;
     }
+
     .col-md-6 {
         max-width: 80%;
     }
+
     .col-md-8 {
         max-width: 80%;
     }
+
     .col-md-8 {
         max-width: 80%;
     }
+
     .col-md-12 {
         max-width: 80%;
     }

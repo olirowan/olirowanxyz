@@ -55,7 +55,7 @@ body {
     -webkit-text-size-adjust: 100%;
     overflow-x: hidden;
     height: 100%;
-    background-color: #FFFFFC;
+    background-color: #FFFFFF;
     /*
 
     White Candidates
@@ -150,7 +150,7 @@ p.last {
 }
 
 p.tagline {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 p img {
@@ -358,6 +358,19 @@ select {
 /* #Containers
 ================================================== */
 
+#app-content {
+    height: 100%;
+}
+
 #about-text-container {
     background: #4e8de5 url(../images/rausch.png) repeat;
+}
+
+#home-banner-container {
+    height: 86vh;
+    width: 100%;
+    background-size: cover;
+    background-image: url(../images/landscape.jpg);
+    background-repeat: no-repeat;
+
 }

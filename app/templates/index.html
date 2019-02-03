@@ -4,67 +4,67 @@
 
 {% block app_content %}
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-5">
-                <img src="{{ url_for('static', filename='images/olirock.jpg') }}"
-                     alt="olirowan"
-                     title="olirowan"
-                     class="img-rounded shadow">
-            </div>
-
-            <div class="col-md-5 about-me-title about-me">
-                <h2><br></h2>
-                <h2>olirowan</h2>
-                <h2><br></h2>
-                <p class="tagline">
-                    A blog about building a blog - and some other stuff.
-                </p>
-
-                <p class="tagline">
-                    Read more on <a href="{{ url_for('about') }}">/about</a>
-                </p>
-            </div>
-        </div>
-        <hr class="separator1">
-        <h2><br></h2>
-
-        <div class="row">
-            <div class="col-md-12">
-                <h2><br></h2>
-                <h2>Blog Posts</h2>
-                <hr class="separator1">
-                <div class="row">
-                    {% for entry in blogposts[:3] %}
-                        <article class="media content-section">
-                            <div class="col-2 col-sm-1 blog-icon">
-                                <h2 class="fas {{ entry.icon }}"></h2>
-                            </div>
-                            <div class="col-10">
-                                <div class="media-body">
-                                    <h3><a href="{% if entry.published %}{{ url_for('readpost', slug=entry.slug) }}
-                                    {% else %}{{ url_for('editpost', slug=entry.slug) }}{% endif %}">
-                                        {{ entry.title }}
-                                    </a>
-                                    </h3>
-                                    <p>Posted {{ moment(entry.timestamp, local=true).fromNow() }}</p>
-                                </div>
-                                <hr class="separator1">
-                            </div>
-                        </article>
-                    {% endfor %}
+    <div id="home-banner-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <br>
+                    {#                    <img src="{{ url_for('static', filename='images/some_image_maybe.jpg') }}"#}
+                    {#                         alt="olirowan"#}
+                    {#                         title="olirowan"#}
+                    {#                         class="img-rounded shadow">#}
+                </div>
+                <div class="col-md-6 about-me-title about-me">
+                    <h2><br></h2>
+                    <h2>olirowan</h2>
+                    <br>
+                    <p class="tagline">
+                        A blog about building a blog - and some other stuff.
+                    </p>
+                    <p class="tagline">
+                        Read more on <a href="#about-text-container">/about</a>
+                    </p>
                 </div>
             </div>
         </div>
-
-        <hr class="separator1">
-        <p>
-            You can find more posts like these on <a href="{{ url_for('blog') }}">/blog </a>
-        </p>
-        <h3><br></h3>
     </div>
 
-
+    <div id="home-white-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1><br></h1>
+                    <h2>Blog Posts</h2>
+                    <hr class="separator1">
+                    <div class="row">
+                        {% for entry in blogposts[:3] %}
+                            <article class="media content-section">
+                                <div class="col-2 col-sm-1 blog-icon">
+                                    <h2 class="fas {{ entry.icon }}"></h2>
+                                </div>
+                                <div class="col-10">
+                                    <div class="media-body">
+                                        <h3><a href="{% if entry.published %}{{ url_for('readpost', slug=entry.slug) }}
+                                    {% else %}{{ url_for('editpost', slug=entry.slug) }}{% endif %}">
+                                            {{ entry.title }}
+                                        </a>
+                                        </h3>
+                                        <p>Posted {{ moment(entry.timestamp, local=true).fromNow() }}</p>
+                                    </div>
+                                    <hr class="separator1">
+                                </div>
+                            </article>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <hr class="separator1">
+            <p>
+                You can find more posts like these on <a href="{{ url_for('blog') }}">/blog </a>
+            </p>
+            <h1><br></h1>
+        </div>
+    </div>
 
     <div id="about-text-container">
         <div class="container">
@@ -79,13 +79,14 @@
                     <p>
                         The original aim was to find a project where I would be able to implement best security
                         practices while getting some familiarity with full stack development. This required a platform
-                        that I could build where users could sign up and interact with something - like a simple blog site.
+                        that I could build where users could sign up and interact with something - like a simple blog
+                        site.
                     </p>
                     <br>
                     <p>
                         The problem was that I didn't have anything to write about. Eventually I thought it would be a
-                        good idea to get the site to a fairly stable state and publish it. Then I could continue it's
-                        development whilst documenting the changes along the way - providing the content for
+                        good idea to get the site to a fairly stable state and publish it. Then I could continue its
+                        development whilst documenting the changes along the way - this would provide the content for
                         blog posts.
                     </p>
                 </div>
@@ -94,7 +95,7 @@
                     <img src="{{ url_for('static', filename='images/olirock.jpg') }}"
                          alt="olirowan"
                          title="olirowan"
-                         class="img-thumbnail">
+                         class="img-rounded">
                 </div>
             </div>
             <hr class="separator1">
@@ -108,28 +109,12 @@
             <hr class="separator1">
             <div class="row about-text-row">
                 <div class="col-md-5">
-                    <img src="{{ url_for('static', filename='images/monkey.jpg') }}"
-                         alt="olirowan"
-                         title="olirowan"
-                         class="img-thumbnail">
-                </div>
-                <div class="col-md-1"></div>
-                <div class="col-md-5">
                     <h2><br></h2>
-                    <h2>Built With</h2>
+                    <h2>Resources used to develop this site.</h2>
                     <hr class="separator1">
-
-                    <p>
-                        This site is developed using <a href="http://flask.pocoo.org/">Flask</a>.
-                    </p>
-                    <p>
-                        A micro web application framework written in Python.
-                    </p>
-                    <p>
-                        The design is created using the <a href="https://getbootstrap.com/">Bootstrap</a> framework.
-                    </p>
                     <p>
                         The icons used throughout the site have been obtained from
+                        <a href="https://konpa.github.io/devicon/">Devicon</a>,
                         <a href="https://www.freepik.com/">freepik</a>
                         and
                         <a href="https://fontawesome.com/">Font Awesome</a>.
@@ -137,17 +122,15 @@
                     <p>
                         The back-end relies on the use of <a href="https://www.sqlalchemy.org/">SQLAlchemy</a>
                         to allow for interaction between the application and the database.
-                        The SSL has been obtained for free from the <a href="https://letsencrypt.org/">Lets Encrypt</a>
-                        certificate authority.
                     </p>
-                    <br>
                     <p>
                         A lot of resources have carried the development of this site. Notably - the Flask tutorials
-                        written
-                        by
-                        <a href="https://blog.miguelgrinberg.com/">Miguel Grinberg</a> and
-                        <a href="http://charlesleifer.com/blog/how-to-make-a-flask-blog-in-one-hour-or-less/">Charles
-                            Leifer</a>.
+                        written by
+                        <a href="https://blog.miguelgrinberg.com/">Miguel Grinberg</a>
+                        and
+                        <a href="http://charlesleifer.com/blog/how-to-make-a-flask-blog-in-one-hour-or-less/">
+                            Charles Leifer</a>.
+
                         Also, the <a href="https://old.reddit.com/r/webdev/">/r/webdev</a> community, and the
                         posts on the
                         <a href="https://security.stackexchange.com/questions/tagged/web-application?sort=votes&pageSize=15">
@@ -156,6 +139,100 @@
                     </p>
                     <h1><br></h1>
                 </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <h2><br></h2>
+                    <div class="row">
+                        <article class="media content-section">
+                            <div class="col-2">
+                                <img src="{{ url_for('static', filename='images/icons/flask-plain.svg') }}"
+                                     alt="atl"
+                                     title="atl"
+                                     class="img-rounded">
+                            </div>
+                            <div class="col-10">
+                                <div class="media-body">
+                                    <h3>
+                                        Developed with <a href="http://flask.pocoo.org/">Flask</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="row">
+                        <article class="media content-section">
+                            <div class="col-2">
+                                <img src="{{ url_for('static', filename='images/icons/python-plain.svg') }}"
+                                     alt="atl"
+                                     title="atl"
+                                     class="img-rounded">
+                            </div>
+                            <div class="col-10">
+                                <div class="media-body">
+                                    <h3>
+                                        Written in <a href="http://flask.pocoo.org/">Python</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="row">
+                        <article class="media content-section">
+                            <div class="col-2">
+                                <img src="{{ url_for('static', filename='images/icons/bootstrap-plain.svg') }}"
+                                     alt="alt"
+                                     title="atl"
+                                     class="img-rounded">
+                            </div>
+                            <div class="col-10">
+                                <div class="media-body">
+                                    <h3>
+                                        Designed with <a href="https://getbootstrap.com/">Bootstrap</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="row">
+                        <article class="media content-section">
+                            <div class="col-2">
+                                <img src="{{ url_for('static', filename='images/icons/nginx-plain.svg') }}"
+                                     alt="flask"
+                                     title="flask"
+                                     class="img-rounded">
+                            </div>
+                            <div class="col-10">
+                                <div class="media-body">
+                                    <h3>
+                                        Served with <a href="https://getbootstrap.com/">NGINX</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="row">
+                        <article class="media content-section">
+                            <div class="col-2">
+                                <img src="{{ url_for('static', filename='images/icons/letsencrypt-plain.svg') }}"
+                                     alt="flask"
+                                     title="flask"
+                                     class="img-rounded">
+                            </div>
+                            <div class="col-10">
+                                <div class="media-body">
+                                    <h3>
+                                        Secured with <a href="https://getbootstrap.com/">Let's Encrypt</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                </div>
             </div>
         </div>
         <hr class="separator1">
@@ -163,8 +240,5 @@
     </div>
 
     <h1><br></h1>
-    {% block footer %}
-        {% include "footer.html" %}
-    {% endblock %}
 
 {% endblock %}
