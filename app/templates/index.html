@@ -33,8 +33,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1><br></h1>
-                    <h2>Blog Posts</h2>
+                    <h2 class="blog-post-top-separator">Blog Posts</h2>
                     <hr class="separator1">
                     <div class="row">
                         {% for entry in blogposts[:3] %}
@@ -59,10 +58,9 @@
                 </div>
             </div>
             <hr class="separator1">
-            <p>
+            <p class="blog-post-bottom-separator">
                 You can find more posts like these on <a href="{{ url_for('blog') }}">/blog </a>
             </p>
-            <h1><br></h1>
         </div>
     </div>
 
@@ -107,136 +105,114 @@
         <h1><br></h1>
         <div class="container">
             <hr class="separator1">
-            <div class="row about-text-row">
+            <div class="row resources-text-row">
                 <div class="col-md-5">
                     <h2><br></h2>
-                    <h2>Resources used to develop this site.</h2>
+                    <h2>Resources that have carried the development of this site.</h2>
                     <hr class="separator1">
+                    <br>
                     <p>
-                        The icons used throughout the site have been obtained from
-                        <a href="https://konpa.github.io/devicon/">Devicon</a>,
-                        <a href="https://www.freepik.com/">freepik</a>
-                        and
-                        <a href="https://fontawesome.com/">Font Awesome</a>.
-                    </p>
-                    <p>
-                        The back-end relies on the use of <a href="https://www.sqlalchemy.org/">SQLAlchemy</a>
-                        to allow for interaction between the application and the database.
-                    </p>
-                    <p>
-                        A lot of resources have carried the development of this site. Notably - the Flask tutorials
-                        written by
-                        <a href="https://blog.miguelgrinberg.com/">Miguel Grinberg</a>
-                        and
-                        <a href="http://charlesleifer.com/blog/how-to-make-a-flask-blog-in-one-hour-or-less/">
-                            Charles Leifer</a>.
+                        Most of the images and icons used throughout the site are sourced from
 
-                        Also, the <a href="https://old.reddit.com/r/webdev/">/r/webdev</a> community, and the
-                        posts on the
-                        <a href="https://security.stackexchange.com/questions/tagged/web-application?sort=votes&pageSize=15">
-                            Security Stack Exchange
-                        </a> site have been a great source of information.
+                        <a target="_blank" href="https://konpa.github.io/devicon/">Devicon</a>,
+
+                        <a target="_blank" href="https://www.freepik.com/">freepik</a>,
+
+                        <a target="_blank" href="https://unsplash.com/">Unsplash</a> and
+
+                        <a target="_blank" href="https://fontawesome.com/">Font Awesome</a>.
                     </p>
-                    <h1><br></h1>
+                    <p>
+                        The resources used for learning Flask development was the book written by
+                        <a target="_blank" href="https://blog.miguelgrinberg.com/">Miguel Grinberg</a>
+                        and the blog posts by
+                        <a target="_blank" href="https://charlesleifer.com/">Charles Leifer</a>.
+                    </p>
+                    <p>
+                        Design inspiration comes from the
+                        <a target="_blank" href="https://old.reddit.com/r/webdev/">/r/webdev</a>
+                        and
+                        <a target="_blank" href="https://www.reddit.com/r/web_design/">/r/web_design</a>
+                        communities.
+                    </p>
                 </div>
-                <div class="col-md-1"></div>
-                <div class="col-md-5">
+                <div class="col-md-2"></div>
+                <div class="col-md-5 tools-resources">
                     <h2><br></h2>
                     <div class="row">
-                        <article class="media content-section">
-                            <div class="col-2">
-                                <img src="{{ url_for('static', filename='images/icons/flask-plain.svg') }}"
-                                     alt="atl"
-                                     title="atl"
-                                     class="img-rounded">
-                            </div>
-                            <div class="col-10">
-                                <div class="media-body">
-                                    <h3>
-                                        Developed with <a href="http://flask.pocoo.org/">Flask</a>
-                                    </h3>
-                                </div>
-                            </div>
-                        </article>
+                        <div class="col-2">
+                            <img src="{{ url_for('static', filename='images/icons/flask-plain.svg') }}"
+                                 alt="Flask Logo"
+                                 title="Flask"
+                                 class="img-fluid">
+                        </div>
+                        <div class="col-10 my-auto">
+                            <h4>
+                                Developed with <a target="_blank" href="http://flask.pocoo.org/">Flask</a>
+                            </h4>
+                        </div>
                     </div>
-
+                    <hr class="separator1">
                     <div class="row">
-                        <article class="media content-section">
-                            <div class="col-2">
-                                <img src="{{ url_for('static', filename='images/icons/python-plain.svg') }}"
-                                     alt="atl"
-                                     title="atl"
-                                     class="img-rounded">
-                            </div>
-                            <div class="col-10">
-                                <div class="media-body">
-                                    <h3>
-                                        Written in <a href="http://flask.pocoo.org/">Python</a>
-                                    </h3>
-                                </div>
-                            </div>
-                        </article>
+                        <div class="col-2">
+                            <img src="{{ url_for('static', filename='images/icons/python-plain.svg') }}"
+                                 alt="Python Logo"
+                                 title="Python"
+                                 class="img-fluid">
+                        </div>
+                        <div class="col-10 my-auto">
+                            <h4>
+                                Written in <a target="_blank" href="https://www.python.org/">Python</a>
+                            </h4>
+                        </div>
                     </div>
-
+                    <hr class="separator1">
                     <div class="row">
-                        <article class="media content-section">
-                            <div class="col-2">
-                                <img src="{{ url_for('static', filename='images/icons/bootstrap-plain.svg') }}"
-                                     alt="alt"
-                                     title="atl"
-                                     class="img-rounded">
-                            </div>
-                            <div class="col-10">
-                                <div class="media-body">
-                                    <h3>
-                                        Designed with <a href="https://getbootstrap.com/">Bootstrap</a>
-                                    </h3>
-                                </div>
-                            </div>
-                        </article>
+                        <div class="col-2">
+                            <img src="{{ url_for('static', filename='images/icons/bootstrap-plain.svg') }}"
+                                 alt="Bootstrap Logo"
+                                 title="Bootstrap"
+                                 class="img-fluid">
+                        </div>
+                        <div class="col-10 my-auto">
+                            <h4>
+                                Designed with <a target="_blank" href="https://getbootstrap.com/">Bootstrap</a>
+                            </h4>
+                        </div>
                     </div>
-
+                    <hr class="separator1">
                     <div class="row">
-                        <article class="media content-section">
-                            <div class="col-2">
-                                <img src="{{ url_for('static', filename='images/icons/nginx-plain.svg') }}"
-                                     alt="flask"
-                                     title="flask"
-                                     class="img-rounded">
-                            </div>
-                            <div class="col-10">
-                                <div class="media-body">
-                                    <h3>
-                                        Served with <a href="https://getbootstrap.com/">NGINX</a>
-                                    </h3>
-                                </div>
-                            </div>
-                        </article>
+                        <div class="col-2">
+                            <img src="{{ url_for('static', filename='images/icons/nginx-plain.svg') }}"
+                                 alt="NGINX Logo"
+                                 title="NGINX"
+                                 class="img-fluid">
+                        </div>
+                        <div class="col-10 my-auto">
+                            <h4>
+                                Served with <a target="_blank" href="https://www.nginx.com/">NGINX</a>
+                            </h4>
+                        </div>
                     </div>
-
+                    <hr class="separator1">
                     <div class="row">
-                        <article class="media content-section">
-                            <div class="col-2">
-                                <img src="{{ url_for('static', filename='images/icons/letsencrypt-plain.svg') }}"
-                                     alt="flask"
-                                     title="flask"
-                                     class="img-rounded">
-                            </div>
-                            <div class="col-10">
-                                <div class="media-body">
-                                    <h3>
-                                        Secured with <a href="https://getbootstrap.com/">Let's Encrypt</a>
-                                    </h3>
-                                </div>
-                            </div>
-                        </article>
+                        <div class="col-2">
+                            <img src="{{ url_for('static', filename='images/icons/letsencrypt-plain.svg') }}"
+                                 alt="Let's Encrypt Logo"
+                                 title="Let's Encrypt"
+                                 class="img-fluid">
+                        </div>
+                        <div class="col-10 my-auto">
+                            <h4>
+                                Secured with <a target="_blank" href="https://letsencrypt.org/">Let's Encrypt</a>
+                            </h4>
+                        </div>
                     </div>
-
                 </div>
             </div>
+            <hr class="separator1">
+            <h1><br></h1>
         </div>
-        <hr class="separator1">
-        <h1><br></h1>
     </div>
 
     <h1><br></h1>

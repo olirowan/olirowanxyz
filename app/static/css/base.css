@@ -121,9 +121,6 @@ h3 {
 
 h4 {
     font-size: 18px;
-    margin-bottom: 10px;
-    text-transform: capitalize;
-    color: #543d1f;
 }
 
 h5 {
@@ -227,6 +224,24 @@ hr {
 ::-moz-selection {
     background: #f9efe3;
     color: #261b0d; /* Firefox */
+}
+
+.resources-text-row p {
+    font-size: 16px;
+    text-align: justify;
+    padding-bottom: 5px;
+}
+
+.resources-text-row h2 {
+    text-align: center;
+}
+
+.tools-resources {
+    text-align: left;
+}
+
+.tools-resources img {
+    height: 40px;
 }
 
 /* #Links
@@ -360,6 +375,14 @@ select {
 
 #app-content {
     height: 100%;
+}
+
+.blog-post-top-separator {
+    padding-top: 15vh;
+}
+
+.blog-post-bottom-separator {
+    padding-bottom: 15vh;
 }
 
 #about-text-container {
