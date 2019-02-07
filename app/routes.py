@@ -325,7 +325,7 @@ def _create_or_edit(entry, template, method):
             if method == 'INSERT':
                 try:
                     entry.slug = re.sub('[^\w]+', '-', entry.title.lower())
-                    blog_entry = BlogPost(title=entry.title, slug=entry.slug, content=entry.content, published=entry.published)
+                    blog_entry = BlogPost(title=entry.title, slug=entry.slug, icon=entry.icon, content=entry.content, published=entry.published)
                     db.session.add(blog_entry)
                     db.session.commit()
                 except IntegrityError:
