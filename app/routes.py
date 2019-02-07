@@ -214,9 +214,9 @@ def unfollow(username):
     return redirect(url_for('user', username=username))
 
 
-@app.route('/about')
-def about():
-    return render_template('about.html')
+# @app.route('/about')
+# def about():
+#     return render_template('about.html')
 
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
@@ -315,10 +315,11 @@ def editpost(slug):
 def _create_or_edit(entry, template, method):
     if request.method == 'POST':
         entry.title = request.form.get('title') or ''
+        entry.icon = request.form.get('icon') or ''
         entry.content = request.form.get('content') or ''
         entry.published = bool(int(request.form.get('published') or '0'))
 
-        if not (entry.title and entry.content):
+        if not (entry.title and entry.content and entry.icon):
             flash('Title and Content values required.', 'danger')
         else:
             if method == 'INSERT':
@@ -340,6 +341,7 @@ def _create_or_edit(entry, template, method):
                     entry.slug = re.sub('[^\w]+', '-', entry.title.lower())
                     BlogPost.title = entry.title
                     BlogPost.slug = entry.slug
+                    BlogPost.icon = entry.icon
                     BlogPost.content = entry.content
                     BlogPost.published = entry.published
                     db.session.commit()

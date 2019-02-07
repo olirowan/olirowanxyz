@@ -217,6 +217,20 @@ ul.sf-menu li li li:hover ul, ul.sf-menu li li li.sfHover ul {
     color: #fff;
 }
 
+
+.black-link-hover a {
+    text-decoration: none;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+.black-link-hover a:hover {
+    color: #444;
+}
+
 li a#visited {
     border-bottom: 1px solid #e8ded1;
     color: #fff;

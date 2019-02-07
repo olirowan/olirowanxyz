@@ -22,7 +22,7 @@
                         A blog about building a blog - and some other stuff.
                     </p>
                     <p class="tagline">
-                        Read more on <a href="#about-text-container">/about</a>
+                        Read more below.
                     </p>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                                     <h2 class="fas {{ entry.icon }}"></h2>
                                 </div>
                                 <div class="col-10">
-                                    <div class="media-body">
+                                    <div class="media-body black-link-hover">
                                         <h3><a href="{% if entry.published %}{{ url_for('readpost', slug=entry.slug) }}
                                     {% else %}{{ url_for('editpost', slug=entry.slug) }}{% endif %}">
                                             {{ entry.title }}
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <hr class="separator1">
-            <p class="blog-post-bottom-separator">
+            <p class="blog-post-bottom-separator black-link-hover">
                 You can find more posts like these on <a href="{{ url_for('blog') }}">/blog </a>
             </p>
         </div>
@@ -103,7 +103,7 @@
 
     <div id="home-white-container">
         <h1><br></h1>
-        <div class="container">
+        <div class="container black-link-hover">
             <hr class="separator1">
             <div class="row resources-text-row">
                 <div class="col-md-5">
@@ -123,13 +123,13 @@
                         <a target="_blank" href="https://fontawesome.com/">Font Awesome</a>.
                     </p>
                     <p>
-                        The resources used for learning Flask development was the book written by
+                        The resources used to learn Flask exist in the form of the book written by
                         <a target="_blank" href="https://blog.miguelgrinberg.com/">Miguel Grinberg</a>
                         and the blog posts by
                         <a target="_blank" href="https://charlesleifer.com/">Charles Leifer</a>.
                     </p>
                     <p>
-                        Design inspiration comes from the
+                        Design inspiration comes from the posts in the
                         <a target="_blank" href="https://old.reddit.com/r/webdev/">/r/webdev</a>
                         and
                         <a target="_blank" href="https://www.reddit.com/r/web_design/">/r/web_design</a>

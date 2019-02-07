@@ -19,7 +19,7 @@
                                 <h2 class="fas {{ entry.icon }}"></h2>
                             </div>
                             <div class="col-10">
-                                <div class="media-body">
+                                <div class="media-body black-link-hover">
                                     <h3><a href="{% if entry.published %}{{ url_for('readpost', slug=entry.slug) }}
                                     {% else %}{{ url_for('editpost', slug=entry.slug) }}{% endif %}">
                                         {{ entry.title }}
