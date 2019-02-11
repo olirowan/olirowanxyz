@@ -1192,9 +1192,12 @@ aside {
         margin-top: 13px;
     }
 
-    .tagline {
+    p.tagline {
         color: #FFFFFF;
-        font-size: 20px;
+        font-size: 27px;
+        margin-top: 40px;
+        text-align: left;
+        text-shadow: 1px 1px #444;
     }
 }
 
