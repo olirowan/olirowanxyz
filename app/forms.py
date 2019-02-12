@@ -15,9 +15,14 @@ class LoginForm(FlaskForm):
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(message="Please don't leave this field blank."), Length(min=4, max=32), Regexp(regex='^(?=.*[a-zA-Z])[A-Za-z0-9_]*$', message='Only letters, numbers, and underscores are accepted.')])
     email = StringField('Email', validators=[DataRequired(message="Please don't leave this field blank."), Email(message="Please enter a valid email.")])
-    password = PasswordField('Password', validators=[DataRequired(message="Please don't leave this field blank."), Length(min=10, max=128, message="Password must be at least 10 characters.")])
+    password = PasswordField('Password', validators=[DataRequired(message="Please don't leave this field blank."),
+                                                     Length(min=10, max=128, message="Please make sure your password contains at least 10 characters."),
+                                                     Regexp(regex="^.*[a-z].*$", message="Please make sure your password contains at least 1 lowercase character."),
+                                                     Regexp(regex="^.*[A-Z].*$", message="Please make sure your password contains at least 1 uppercase character."),
+                                                     Regexp(regex="^.*[0-9].*$", message="Please make sure your password contains at least 1 number.")
+                                                     ])
     password2 = PasswordField(
-        'Repeat Password', validators=[DataRequired(message="Please don't leave this field blank."), EqualTo('password', message="Please ensure both passwords are the same.")])
+        'Repeat Password', validators=[DataRequired(message="Please don't leave this field blank."), EqualTo('password', message="Please make sure both passwords are the same.")])
     if app.config['ENVIRONMENT_TYPE'] == 'production':
         recaptcha = RecaptchaField(validators=None)
     submit = SubmitField('Register')
@@ -43,9 +48,9 @@ class ResetPasswordRequestForm(FlaskForm):
 
 
 class ResetPasswordForm(FlaskForm):
-    password = PasswordField('Password', validators=[DataRequired(message="Please don't leave this field blank."), Length(min=10, max=128, message="Password must be at least 10 characters.")])
+    password = PasswordField('Password', validators=[DataRequired(message="Please don't leave this field blank."), Length(min=10, max=128, message="Please make sure your password contains at least 10 characters.")])
     password2 = PasswordField(
-        'Repeat Password', validators=[DataRequired(message="Please don't leave this field blank."), EqualTo('password', message="Please ensure both passwords are the same.")])
+        'Repeat Password', validators=[DataRequired(message="Please don't leave this field blank."), EqualTo('password', message="Please make sure both passwords are the same.")])
     submit = SubmitField('Confirm Reset')
 
 
