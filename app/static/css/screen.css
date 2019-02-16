@@ -319,10 +319,9 @@ li a#visited {
 
 .post-text {
 
-    color: #2d2010;
+    color: #444;
     line-height: 1.5em;
     font-size: 14px;
-    text-shadow: 1px 1px 0 #fff;
     font-family: Arial, Helvetica, sans-serif;
 
 }
@@ -343,19 +342,18 @@ li a#visited {
 
 .blog-post-text p {
 
-    color: #2d2010;
+    color: #444;
     font-size: 15px;
     line-height: 1.5em;
-    text-shadow: 1px 1px 0 #fff;
     padding-bottom: 10px;
     text-align: justify;
 }
 
 .blog-post-text pre {
 
-    color: #2d2010;
+    color: #444;
+    background-color: unset;
     line-height: 1.5em;
-    text-shadow: 1px 1px 0 #fff;
     padding-top: 10px;
     padding-bottom: 5px;
     padding-left: 10px;
