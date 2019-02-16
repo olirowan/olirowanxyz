@@ -147,7 +147,7 @@ class BlogPost(db.Model):
 
     @property
     def html_content(self):
-        code_css_class = "highlight"
+        code_css_class = "manni"
         get_style_by_name(code_css_class)
         hilite = CodeHiliteExtension(noclasses=True, pygments_style=code_css_class)
         extras = ExtraExtension()
