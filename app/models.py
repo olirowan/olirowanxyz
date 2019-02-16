@@ -11,10 +11,10 @@ from app import app, db, login
 from markdown import markdown
 from markdown.extensions.codehilite import CodeHiliteExtension
 from markdown.extensions.extra import ExtraExtension
+from pygments.styles import get_style_by_name
 from micawber import bootstrap_basic, parse_html
 from micawber.cache import Cache as OEmbedCache
 from flask import Markup
-
 
 followers = db.Table(
     'followers',
@@ -29,7 +29,7 @@ markdown_tags = [
     "b", "i", "strong", "em", "tt",
     "p", "br",
     "span", "div", "blockquote", "code", "hr",
-    "ul", "ol", "li", "dd", "dt", "dl",
+    "tbody", "table", "tr", "td", "ul", "ol", "li", "dd", "dt", "dl",
     "img",
     "a",
     "pre",
@@ -147,7 +147,9 @@ class BlogPost(db.Model):
 
     @property
     def html_content(self):
-        hilite = CodeHiliteExtension(linenums=False, css_class='highlight')
+        code_css_class = "highlight"
+        get_style_by_name(code_css_class)
+        hilite = CodeHiliteExtension(noclasses=True, pygments_style=code_css_class)
         extras = ExtraExtension()
         markdown_content = markdown(self.content, extensions=[hilite, extras])
         oembed_content = parse_html(
