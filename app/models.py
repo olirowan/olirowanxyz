@@ -144,22 +144,6 @@ class BlogPost(db.Model):
     def drafts(cls):
         return BlogPost.query.filter_by(published=0)
 
-    # @property
-    # def html_content(self):
-    #     code_css_class = "monokai"
-    #     hilite = CodeHiliteExtension(linenums=False, noclasses=True, pygments_style=code_css_class)
-    #     extras = ExtraExtension()
-    #     markdown_content = markdown(self.content, extensions=[hilite, extras])
-    #     oembed_content = parse_html(
-    #         markdown_content,
-    #         oembed_providers,
-    #         urlize_all=True,
-    #         maxwidth=app.config['SITE_WIDTH'])
-    #     markup_content = Markup(oembed_content)
-    #     sanitised_content = bleach.clean(markup_content, tags=markdown_tags, strip=False)
-    #     re_markup = Markup(sanitised_content)
-    #     return re_markup
-
 
     @property
     def html_content(self):
@@ -167,15 +151,15 @@ class BlogPost(db.Model):
         hilite = CodeHiliteExtension(linenums=False, noclasses=True, pygments_style=code_css_class)
         extras = ExtraExtension()
 
-        sanitised_content = bleach.clean(self.content, tags=markdown_tags, strip=False)
-        #markup_content = Markup(sanitised_content)
+        pre_sanistised_markup = Markup(self.content)
+        post_sanitised_markup = bleach.clean(pre_sanistised_markup, tags=markdown_tags, strip=False)
+        markdown_content = markdown(post_sanitised_markup, extensions=[hilite, extras])
 
-        markdown_content = markdown(sanitised_content, extensions=[hilite, extras])
         oembed_content = parse_html(
             markdown_content,
             oembed_providers,
             urlize_all=True,
             maxwidth=app.config['SITE_WIDTH'])
+
         post_markup = Markup(oembed_content)
         return post_markup
-    
