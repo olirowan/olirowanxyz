@@ -144,18 +144,38 @@ class BlogPost(db.Model):
     def drafts(cls):
         return BlogPost.query.filter_by(published=0)
 
+    # @property
+    # def html_content(self):
+    #     code_css_class = "monokai"
+    #     hilite = CodeHiliteExtension(linenums=False, noclasses=True, pygments_style=code_css_class)
+    #     extras = ExtraExtension()
+    #     markdown_content = markdown(self.content, extensions=[hilite, extras])
+    #     oembed_content = parse_html(
+    #         markdown_content,
+    #         oembed_providers,
+    #         urlize_all=True,
+    #         maxwidth=app.config['SITE_WIDTH'])
+    #     markup_content = Markup(oembed_content)
+    #     sanitised_content = bleach.clean(markup_content, tags=markdown_tags, strip=False)
+    #     re_markup = Markup(sanitised_content)
+    #     return re_markup
+
+
     @property
     def html_content(self):
         code_css_class = "monokai"
         hilite = CodeHiliteExtension(linenums=False, noclasses=True, pygments_style=code_css_class)
         extras = ExtraExtension()
-        markdown_content = markdown(self.content, extensions=[hilite, extras])
+
+        sanitised_content = bleach.clean(self.content, tags=markdown_tags, strip=False)
+        #markup_content = Markup(sanitised_content)
+
+        markdown_content = markdown(sanitised_content, extensions=[hilite, extras])
         oembed_content = parse_html(
             markdown_content,
             oembed_providers,
             urlize_all=True,
             maxwidth=app.config['SITE_WIDTH'])
-        markup_content = Markup(oembed_content)
-        sanitised_content = bleach.clean(markup_content, tags=markdown_tags, strip=False)
-        re_markup = Markup(sanitised_content)
-        return re_markup
+        post_markup = Markup(oembed_content)
+        return post_markup
+    
