@@ -34,6 +34,14 @@ markdown_tags = [
     "pre",
 ]
 
+markdown_styles = [
+    "style"
+]
+
+markdown_attributes = [
+    "background", "color", "font-style", "font-weight", "text-decoration"
+]
+
 @app.template_filter('clean_querystring')
 def clean_querystring(request_args, *keys_to_remove, **new_values):
     querystring = dict((key, value) for key, value in request_args.items())
@@ -154,7 +162,8 @@ class BlogPost(db.Model):
         pre_sanistised_markup = Markup(self.content)
 
         markdown_content = markdown(pre_sanistised_markup, extensions=[hilite, extras])
-        post_sanitised_markup = bleach.clean(markdown_content, tags=markdown_tags, strip=False)
+        post_sanitised_markup = bleach.clean(markdown_content, tags=markdown_tags,
+                                             attributes=markdown_attributes, styles=markdown_styles, strip=False)
 
         oembed_content = parse_html(
             post_sanitised_markup,
