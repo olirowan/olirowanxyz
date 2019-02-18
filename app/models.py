@@ -155,7 +155,7 @@ class BlogPost(db.Model):
 
     @property
     def html_content(self):
-        code_css_class = "monokai"
+        code_css_class = "friendly"
         hilite = CodeHiliteExtension(linenums=False, noclasses=True, pygments_style=code_css_class)
         extras = ExtraExtension()
 
