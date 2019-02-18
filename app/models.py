@@ -152,11 +152,12 @@ class BlogPost(db.Model):
         extras = ExtraExtension()
 
         pre_sanistised_markup = Markup(self.content)
-        post_sanitised_markup = bleach.clean(pre_sanistised_markup, tags=markdown_tags, strip=False)
-        markdown_content = markdown(post_sanitised_markup, extensions=[hilite, extras])
+
+        markdown_content = markdown(pre_sanistised_markup, extensions=[hilite, extras])
+        post_sanitised_markup = bleach.clean(markdown_content, tags=markdown_tags, strip=False)
 
         oembed_content = parse_html(
-            markdown_content,
+            post_sanitised_markup,
             oembed_providers,
             urlize_all=True,
             maxwidth=app.config['SITE_WIDTH'])
