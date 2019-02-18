@@ -35,12 +35,12 @@ markdown_tags = [
 ]
 
 markdown_styles = [
-    "style"
+    "background", "color", "font-weight", "font-style", "text-decoration"
 ]
 
-markdown_attributes = [
-    "background", "color", "font-style", "font-weight", "text-decoration"
-]
+markdown_attributes = {
+    "*": ["style"]
+}
 
 @app.template_filter('clean_querystring')
 def clean_querystring(request_args, *keys_to_remove, **new_values):
