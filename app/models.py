@@ -36,7 +36,8 @@ markdown_tags = [
 
 markdown_styles = [
     "background",
-    "border", "border-color", "border-radius", "border-style", "border-width",
+    "border", "border-top", "border-bottom", "border-left", "border-right",
+    "border-color", "border-radius", "border-style", "border-width",
     "color", "font-weight", "font-style", "text-decoration"
 ]
 
