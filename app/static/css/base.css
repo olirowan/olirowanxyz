@@ -257,8 +257,14 @@ p a, p a:visited {
     line-height: inherit;
 }
 
-/* #Forms
+/* #Code Highlighting
 ================================================== */
+
+.codehilite {
+    border: 1px solid #d8d8d8;
+    border-radius: 5px;
+    padding-bottom: 5px;
+}
 
 /* General Forms */
 
