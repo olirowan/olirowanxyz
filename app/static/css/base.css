@@ -266,6 +266,9 @@ p a, p a:visited {
     padding-bottom: 5px;
     margin-bottom: 10px;
     line-height: 135%;
+}
+
+.codehilite pre {
     font-family: 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
 }
 
