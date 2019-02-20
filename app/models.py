@@ -42,7 +42,7 @@ markdown_styles = [
 ]
 
 markdown_attributes = {
-    "*": ["style"]
+    "*": ["style", "class"]
 }
 
 @app.template_filter('clean_querystring')
