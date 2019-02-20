@@ -264,6 +264,9 @@ p a, p a:visited {
     border: 1px solid #d8d8d8;
     border-radius: 5px;
     padding-bottom: 5px;
+    margin-bottom: 10px;
+    line-height: 135%;
+    font-family: 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
 }
 
 /* General Forms */
