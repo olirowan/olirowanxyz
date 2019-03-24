@@ -27,11 +27,12 @@ bootstrap = Bootstrap(app)
 moment = Moment(app)
 
 
+log_path = os.path.join(app.config['WRITE_PATH'], 'logs')
 
-if not os.path.exists('logs'):
-    os.mkdir('logs')
+if not os.path.exists(log_path):
+    os.mkdir(log_path)
 
-file_handler = RotatingFileHandler('logs/olirowanxyz_app.log', maxBytes=10000000, backupCount=10)
+file_handler = RotatingFileHandler(log_path + '/olirowanxyz_app.log', maxBytes=10000000, backupCount=10)
 file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
 file_handler.setLevel(logging.DEBUG)
 app.logger.addHandler(file_handler)

@@ -8,7 +8,10 @@ class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY')
     ENVIRONMENT_TYPE = os.environ.get('ENVIRONMENT_TYPE')
 
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
+    BACKUP_PATH = '/backup/'
+    WRITE_PATH = '/tmp/olirowanxyz/'
+
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(WRITE_PATH, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     BLOG_ADMIN_USER = os.environ.get('BLOG_ADMIN_USER')
@@ -32,4 +35,3 @@ class Config(object):
     SITE_WIDTH = 800
     POSTS_PER_PAGE = 5
 
-    BACKUP_PATH = '/backup/'
