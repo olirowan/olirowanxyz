@@ -28,7 +28,7 @@ markdown_tags = [
     "b", "i", "strong", "em", "tt",
     "p", "br",
     "span", "div", "blockquote", "code", "hr",
-    "tbody", "table", "tr", "td", "ul", "ol", "li", "dd", "dt", "dl",
+    "thead", "tbody", "table", "th", "tr", "td", "ul", "ol", "li", "dd", "dt", "dl",
     "img",
     "a",
     "pre",
