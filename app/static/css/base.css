@@ -22,7 +22,8 @@ body {
 }
 
 ol, ul {
-    list-style: none;
+    list-style: disc;
+    padding-left: 15px;
 }
 
 blockquote, q {
@@ -37,6 +38,8 @@ blockquote:before, blockquote:after, q:before, q:after {
 table {
     border-radius: 5px;
     border-collapse: inherit;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 

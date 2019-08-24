@@ -336,8 +336,8 @@ li a#visited {
 
 .blog-post-text h3 {
 
-    margin-top: 10px;
-    margin-bottom: 8px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .blog-post-text p {
@@ -1229,10 +1229,3 @@ aside {
         max-width: 80%;
     }
 }
-
-
-
-
-
-
-
