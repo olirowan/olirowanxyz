@@ -42,7 +42,8 @@ markdown_styles = [
 ]
 
 markdown_attributes = {
-    "*": ["style", "class"]
+    "*": ["style", "class"],
+    "a": ["href"]
 }
 
 @app.template_filter('clean_querystring')
