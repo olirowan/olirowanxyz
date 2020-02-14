@@ -4,8 +4,8 @@ from flask import render_template, flash, redirect, url_for, request
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db
 from app.tasks import create_database_backup
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, ResetPasswordRequestForm, ResetPasswordForm
-from app.models import User, Post, BlogPost
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, ResetPasswordRequestForm, ResetPasswordForm, CreateTag, CreateBlogPost
+from app.models import User, Post, BlogPost, BlogPostTags, blogtags_association
 from app.email import send_password_reset_email
 from app.validate_admin import validate_if_admin_user
 
@@ -20,7 +20,7 @@ def before_request():
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index/')
 def index():
-    query = BlogPost.public().order_by(BlogPost.timestamp.desc())
+    query = BlogPost.query.join(BlogPostTags, BlogPost.tag).order_by(BlogPost.timestamp.desc()).all()
     return render_template('index.html', blogposts=query)
 
 
@@ -214,11 +214,6 @@ def unfollow(username):
     return redirect(url_for('user', username=username))
 
 
-# @app.route('/about')
-# def about():
-#     return render_template('about.html')
-
-
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
@@ -268,12 +263,23 @@ def edit(id, uid):
 
 @app.route('/blog')
 def blog():
-    query = BlogPost.public().order_by(BlogPost.timestamp.desc())
-    return render_template('blog.html', blogposts=query)
+
+    blog_join = BlogPost.query.join(BlogPostTags, BlogPost.tag).order_by(BlogPost.timestamp.desc()).all()
+    tag_query = BlogPostTags.query.filter()
+
+    return render_template('blog.html', blogposts=blog_join, blogtags=tag_query)
+
+
+@app.route('/blog/tag/<tag_name>')
+def blog_tags(tag_name):
+
+    blog_join = BlogPost.query.filter(BlogPostTags.blogpost_tag.contains(tag_name)).join(BlogPostTags, BlogPost.tag).order_by(BlogPost.timestamp.desc()).all()
+    return render_template('blog_tag.html', blogposts=blog_join, tagged_as=tag_name)
 
 
 @app.route('/<slug>/')
 def readpost(slug):
+
     query = BlogPost.public().filter_by(slug=slug).first_or_404()
     return render_template('readpost.html', blogpost=query)
 
@@ -281,9 +287,9 @@ def readpost(slug):
 @app.route('/admin_panel/', methods=['GET', 'POST'])
 @login_required
 def admin_panel():
+
     if validate_if_admin_user(current_user):
-        query = BlogPost.drafts().order_by(BlogPost.timestamp.desc())
-        return render_template('admin_panel.html', blogposts=query)
+        return render_template('admin_panel.html')
 
     else:
         return redirect(url_for('user', username=current_user.username))
@@ -293,12 +299,30 @@ def admin_panel():
 @login_required
 def createpost():
     if validate_if_admin_user(current_user):
-        method = 'INSERT'
-        return _create_or_edit(BlogPost(title='', content=''), 'createpost.html', method)
+
+        form = CreateBlogPost()
+        if form.validate_on_submit():
+            entry = {}
+            entry['title'] = form.blog_title.data
+            entry['slug'] = re.sub('[^\w]+', '-', form.blog_title.data.lower())
+            entry['icon'] = form.blog_icon.data
+            entry['tag'] = form.blog_tags.data or ''
+            entry['content'] = form.blog_content.data
+
+            blog_entry = BlogPost(title=entry['title'], \
+                slug=entry['slug'], icon=entry['icon'], \
+                tag=[BlogPostTags.query.filter(BlogPostTags.id == int(tag)).first() for tag in form.blog_tags.data], \
+                content=entry['content'])
+
+            db.session.add(blog_entry)
+            db.session.commit()
+            flash('Blog Post Created.')
+            return redirect(url_for('readpost', slug=entry['slug']))
+
+        return render_template('createpost.html', form=form)
 
     else:
-        return redirect(url_for('notes'))
-
+        return redirect(url_for('user', username=current_user.username))
 
 @app.route('/<slug>/editpost/', methods=['GET', 'POST'])
 @login_required
@@ -311,63 +335,6 @@ def editpost(slug):
     else:
         return redirect(url_for('notes'))
 
-
-def _create_or_edit(entry, template, method):
-    if request.method == 'POST':
-        entry.title = request.form.get('title') or ''
-        entry.icon = request.form.get('icon') or ''
-        entry.content = request.form.get('content') or ''
-        entry.published = bool(int(request.form.get('published') or '0'))
-
-        if not (entry.title and entry.content and entry.icon):
-            flash('Title and Content values required.', 'danger')
-        else:
-            if method == 'INSERT':
-                try:
-                    entry.slug = re.sub('[^\w]+', '-', entry.title.lower())
-                    blog_entry = BlogPost(title=entry.title, slug=entry.slug, icon=entry.icon, content=entry.content, published=entry.published)
-                    db.session.add(blog_entry)
-                    db.session.commit()
-                except IntegrityError:
-                    flash('This title has already been used.', 'danger')
-                else:
-                    flash('BlogPost saved successfully.', 'success')
-                    if entry.published:
-                        return redirect(url_for('readpost', slug=entry.slug))
-                    else:
-                        return redirect(url_for('admin_panel'))
-            else:
-                try:
-                    entry.slug = re.sub('[^\w]+', '-', entry.title.lower())
-                    BlogPost.title = entry.title
-                    BlogPost.slug = entry.slug
-                    BlogPost.icon = entry.icon
-                    BlogPost.content = entry.content
-                    BlogPost.published = entry.published
-                    db.session.commit()
-                except IntegrityError:
-                    flash('This title has already been used.', 'danger')
-                else:
-                    flash('BlogPost saved successfully.', 'success')
-                    if entry.published:
-                        return redirect(url_for('readpost', slug=entry.slug))
-                    else:
-                        return redirect(url_for('admin_panel'))
-
-    return render_template(template, entry=entry)
-
-
-@app.route('/drafts/')
-@login_required
-def drafts():
-    if validate_if_admin_user(current_user):
-        query = BlogPost.drafts().order_by(BlogPost.timestamp.desc())
-        return render_template('blog.html', blogposts=query)
-
-    else:
-        return redirect(url_for('notes'))
-
-
 @app.route('/admin_panel/run_db_backup')
 @login_required
 def run_db_backup():
@@ -375,6 +342,26 @@ def run_db_backup():
         create_database_backup()
         flash('Initiated database backup.')
         return redirect(url_for('admin_panel'))
+
+    else:
+        return redirect(url_for('user', username=current_user.username))
+
+
+@app.route('/admin_panel/manage_tags', methods=['GET', 'POST'])
+@login_required
+def manage_tags():
+    if validate_if_admin_user(current_user):
+
+        form = CreateTag()
+        if form.validate_on_submit():
+            tag = BlogPostTags(blogpost_tag=form.tag.data)
+            db.session.add(tag)
+            db.session.commit()
+            flash('Tag Added.')
+            return redirect(url_for('manage_tags'))
+
+        query = BlogPostTags.tag_names()
+        return render_template('manage_tags.html', blogtags=query, form=form)
 
     else:
         return redirect(url_for('user', username=current_user.username))

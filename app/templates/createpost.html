@@ -9,46 +9,15 @@
     <div class="container post-text">
         <div class="row">
             <div class="col-md-12">
+              <h3>
+                  Admin Page - Create Post
+              </h3>
 
-                <form action="{% block form_action %}{{ url_for('createpost') }}{% endblock %}" class="form-horizontal"
-                      method="post">
-                    <div class="form-group">
-                        <label for="title" class="col-sm-2 control-label">Title</label>
-                        <div class="col-sm-10">
-                            <input class="form-control" id="title" name="title" value="{{ entry.title }}">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="icon" class="col-sm-2 control-label">Blog Icon</label>
-                        <div class="col-sm-10">
-                            <input class="form-control" id="icon" name="icon" value="{{ entry.icon }}">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Content" class="col-sm-2 control-label">Content</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control" id="content" name="content"
-                                      style="height: 300px;">{{ entry.content }}</textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <div class="checkbox">
-                                <label>
-                                    <input name="published" type="checkbox" value="1"{% if entry.published %}
-                                           checked="checked"{% endif %}> Published?
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button class="btn btn-default" type="submit">{% block save_button %}
-                                Create{% endblock %}</button>
-                            <a class="btn btn-default" href="{{ url_for('index') }}">Cancel</a>
-                        </div>
-                    </div>
-                </form>
+              {% if form %}
+                  {{ wtf.quick_form(form) }}
+                  <br>
+              {% endif %}
+
             </div>
         </div>
     </div>

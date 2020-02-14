@@ -15,12 +15,6 @@ from micawber import bootstrap_basic, parse_html
 from micawber.cache import Cache as OEmbedCache
 from flask import Markup
 
-followers = db.Table(
-    'followers',
-    db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
-    db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
-)
-
 oembed_providers = bootstrap_basic(OEmbedCache())
 
 markdown_tags = [
@@ -45,6 +39,14 @@ markdown_attributes = {
     "*": ["style", "class"],
     "a": ["href"]
 }
+
+
+followers = db.Table(
+    'followers',
+    db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
+)
+
 
 @app.template_filter('clean_querystring')
 def clean_querystring(request_args, *keys_to_remove, **new_values):
@@ -136,25 +138,35 @@ class Post(db.Model):
         return '<Post {}>'.format(self.body)
 
 
+blogtags_association = db.Table(
+    'blogtags_association',
+    db.Column('tag_id', db.Integer, db.ForeignKey('blog_post_tags.id')),
+    db.Column('blogpost_id', db.Integer, db.ForeignKey('blog_post.id'))
+)
+
+class BlogPostTags(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    blogpost_tag = db.Column(db.String(16), index=True, unique=True)
+    #blogpost_tag = db.relationship('BlogPost', secondary=blogtags_association, backref=db.backref('tagged_as', lazy='dynamic'))
+
+    @classmethod
+    def tag_names(cls):
+        return BlogPostTags.query.filter()
+
+
 class BlogPost(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title  = db.Column(db.String(150))
     icon  = db.Column(db.String(50))
-    tags = db.Column(db.String(30))
     slug = db.Column(db.String(200), unique=True)
     content = db.Column(db.Text)
-    published = db.Column(db.Boolean, index=True)
     timestamp = db.Column(db.DateTime, default=datetime.datetime.now, index=True)
+    tag = db.relationship('BlogPostTags', secondary=blogtags_association, uselist=True, lazy='subquery', backref=db.backref('tag_name', lazy=True))
 
 
     @classmethod
     def public(cls):
-        return BlogPost.query.filter_by(published=1)
-
-
-    @classmethod
-    def drafts(cls):
-        return BlogPost.query.filter_by(published=0)
+        return BlogPost.query.filter()
 
 
     @property
@@ -177,3 +189,5 @@ class BlogPost(db.Model):
 
         post_markup = Markup(oembed_content)
         return post_markup
+
+db.create_all()

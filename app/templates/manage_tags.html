@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% set active_page = "blog" %}
+
+{% block title %}Admin Tags - olirowan{% endblock %}
+
+{% block app_content %}
+
+    <div class="container post-text">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>
+                    Admin Page - Manage Tags
+                </h3>
+
+                {% if form %}
+                    {{ wtf.quick_form(form) }}
+                    <br>
+                {% endif %}
+
+                {% for tag in blogtags %}
+                    <h3>
+                            {{ tag.blogpost_tag }}
+                    </h3>
+                    <br>
+                    <hr class="separator1">
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+    {% block footer %}
+        {% include "footer.html" %}
+    {% endblock %}
+
+{% endblock %}

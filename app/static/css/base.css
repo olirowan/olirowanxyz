@@ -155,6 +155,14 @@ p.tagline {
     font-size: 18px;
 }
 
+p.blogpost_tag {
+  font-size: 12px;
+}
+
+.span_tags {
+  margin-right: 10px;
+}
+
 p img {
     margin: 0;
 }

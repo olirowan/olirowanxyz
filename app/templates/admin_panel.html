@@ -9,51 +9,23 @@
     <div class="container post-text">
         <div class="row">
             <div class="col-md-12">
-
                 <h3>
                     Admin Page
                 </h3>
-
                 <hr class="separator1">
-
-                <h3>
-                    Click to view <a href="{{ url_for('drafts') }}">/drafts</a>
-                </h3>
-
-                <hr class="separator1">
-
                 <h3>
                     Click to <a href="{{ url_for('createpost') }}">/createpost</a>
                 </h3>
-
                 <hr class="separator1">
-
                 <h3>
                     Click to <a href="{{ url_for('run_db_backup') }}">/run_db_backup</a>
                 </h3>
-
                 <hr class="separator1">
-
-                {% for entry in blogposts %}
-                    <h3>
-                        <a href="
-                            {% if entry.published %}{{ url_for('readpost', slug=entry.slug) }}{% else %}{{ url_for('editpost', slug=entry.slug) }}{% endif %}">
-                            {{ entry.title }}
-                        </a>
-                    </h3>
-                    <p>
-                        Created {{ moment(entry.timestamp, local=true).fromNow() }}
-                    </p>
-                    <p>
-                        {{ entry.timestamp.strftime('%A %d %B %Y %H:%M') }}
-                    </p>
-                    <br>
-
-                    <hr class="separator1">
-                {% endfor %}
-
+                <h3>
+                    Click to <a href="{{ url_for('manage_tags') }}">/manage_tags</a>
+                </h3>
                 <hr class="separator1">
-
+                <hr class="separator1">
             </div>
         </div>
     </div>
