@@ -147,7 +147,6 @@ blogtags_association = db.Table(
 class BlogPostTags(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     blogpost_tag = db.Column(db.String(16), index=True, unique=True)
-    #blogpost_tag = db.relationship('BlogPost', secondary=blogtags_association, backref=db.backref('tagged_as', lazy='dynamic'))
 
     @classmethod
     def tag_names(cls):
@@ -161,7 +160,7 @@ class BlogPost(db.Model):
     slug = db.Column(db.String(200), unique=True)
     content = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, default=datetime.datetime.now, index=True)
-    tag = db.relationship('BlogPostTags', secondary=blogtags_association, uselist=True, lazy='subquery', backref=db.backref('tag_name', lazy=True))
+    tag = db.relationship('BlogPostTags', secondary=blogtags_association, uselist=True, lazy='subquery', backref=db.backref('tag_name', lazy='subquery'))
 
 
     @classmethod

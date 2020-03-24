@@ -300,24 +300,23 @@ def admin_panel():
 def createpost():
     if validate_if_admin_user(current_user):
 
-        form = CreateBlogPost()
+        form = CreateBlogPost.refresh_values()
         if form.validate_on_submit():
-            entry = {}
-            entry['title'] = form.blog_title.data
-            entry['slug'] = re.sub('[^\w]+', '-', form.blog_title.data.lower())
-            entry['icon'] = form.blog_icon.data
-            entry['tag'] = form.blog_tags.data or ''
-            entry['content'] = form.blog_content.data
 
-            blog_entry = BlogPost(title=entry['title'], \
-                slug=entry['slug'], icon=entry['icon'], \
+            slug = re.sub('[^\w]+', '-', form.blog_title.data.lower())
+
+            blog_entry = BlogPost( \
+                title=form.blog_title.data, \
+                slug=slug, \
+                icon=form.blog_icon.data, \
                 tag=[BlogPostTags.query.filter(BlogPostTags.id == int(tag)).first() for tag in form.blog_tags.data], \
-                content=entry['content'])
+                content=form.blog_content.data
+            )
 
             db.session.add(blog_entry)
             db.session.commit()
             flash('Blog Post Created.')
-            return redirect(url_for('readpost', slug=entry['slug']))
+            return redirect(url_for('readpost', slug=slug))
 
         return render_template('createpost.html', form=form)
 

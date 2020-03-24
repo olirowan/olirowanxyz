@@ -74,10 +74,15 @@ class EditProfileForm(FlaskForm):
 class CreateBlogPost(FlaskForm):
     blog_title = TextAreaField('Title:', validators=[DataRequired(message="Please enter a title.")])
     blog_icon = TextAreaField('Icon:', validators=[DataRequired(message="Please enter an icon.")])
-    #blog_tags = SelectField('Tags:', choices=[(str(tag.id), str(tag.blogpost_tag)) for tag in BlogPostTags.tag_names()])
-    blog_tags = SelectMultipleField('Tags:', choices=[(str(tag.id), str(tag.blogpost_tag)) for tag in BlogPostTags.tag_names()])
+    blog_tags = SelectMultipleField('Tags:')
     blog_content = TextAreaField('Content:', validators=[DataRequired(message="Please enter blog content.")])
     submit = SubmitField('Post')
+
+    @classmethod
+    def refresh_values(cls):
+        form = cls()
+        form.blog_tags.choices = [(str(tag.id), str(tag.blogpost_tag)) for tag in BlogPostTags.tag_names()]
+        return form
 
     def validate_blog_title(self, blog_title):
         title_used = BlogPost.query.filter_by(title=blog_title.data).first()
