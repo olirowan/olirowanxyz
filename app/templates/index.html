@@ -43,8 +43,7 @@
                                 </div>
                                 <div class="col-10">
                                     <div class="media-body black-link-hover">
-                                        <h3><a href="{% if entry.published %}{{ url_for('readpost', slug=entry.slug) }}
-                                    {% else %}{{ url_for('editpost', slug=entry.slug) }}{% endif %}">
+                                        <h3><a href="{{ url_for('readpost', slug=entry.slug) }}">
                                             {{ entry.title }}
                                         </a>
                                         </h3>
