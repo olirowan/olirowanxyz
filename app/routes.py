@@ -323,16 +323,33 @@ def createpost():
     else:
         return redirect(url_for('user', username=current_user.username))
 
-@app.route('/<slug>/editpost/', methods=['GET', 'POST'])
+
+@app.route('/editpost/<slug>', methods=['GET', 'POST'])
 @login_required
 def editpost(slug):
     if validate_if_admin_user(current_user):
-        method = 'UPDATE'
-        entry = BlogPost.drafts().filter_by(slug=slug).first_or_404()
-        return _create_or_edit(entry, 'editpost.html', method)
+
+        blog_entry = BlogPost.public().filter_by(slug=slug).first_or_404()
+        form = CreateBlogPost.edit_values(blog_entry)
+        if form.validate_on_submit():
+
+            updated_slug = re.sub('[^\w]+', '-', form.blog_title.data.lower())
+
+            blog_entry.title = form.blog_title.data
+            blog_entry.slug = updated_slug
+            blog_entry.icon = form.blog_icon.data
+            blog_entry.tag = [BlogPostTags.query.filter(BlogPostTags.id == int(tag)).first() for tag in form.blog_tags.data]
+            blog_entry.content = form.blog_content.data
+
+            db.session.commit()
+            flash('Blog Post Updated.')
+            return redirect(url_for('readpost', slug=updated_slug))
+
+        return render_template('createpost.html', form=form)
 
     else:
-        return redirect(url_for('notes'))
+        return redirect(url_for('user', username=current_user.username))
+
 
 @app.route('/admin_panel/run_db_backup')
 @login_required

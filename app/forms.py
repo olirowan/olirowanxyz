@@ -1,6 +1,6 @@
 from app import app, db
 from flask_wtf import FlaskForm, RecaptchaField
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, SelectField, SelectMultipleField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, SelectField, SelectMultipleField, HiddenField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length, Regexp
 from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 from app.models import User, BlogPostTags, BlogPost
@@ -72,11 +72,19 @@ class EditProfileForm(FlaskForm):
 
 
 class CreateBlogPost(FlaskForm):
+    original_title = HiddenField()
     blog_title = TextAreaField('Title:', validators=[DataRequired(message="Please enter a title.")])
     blog_icon = TextAreaField('Icon:', validators=[DataRequired(message="Please enter an icon.")])
     blog_tags = SelectMultipleField('Tags:')
     blog_content = TextAreaField('Content:', validators=[DataRequired(message="Please enter blog content.")])
     submit = SubmitField('Post')
+
+    @classmethod
+    def edit_values(cls, blog_entry):
+        form = cls(obj=blog_entry, blog_title=blog_entry.title, blog_icon=blog_entry.icon, blog_content=blog_entry.content)
+        form.blog_tags.choices = [(str(tag.id), str(tag.blogpost_tag)) for tag in BlogPostTags.tag_names()]
+        form.original_title.data = blog_entry.title
+        return form
 
     @classmethod
     def refresh_values(cls):
@@ -85,9 +93,10 @@ class CreateBlogPost(FlaskForm):
         return form
 
     def validate_blog_title(self, blog_title):
-        title_used = BlogPost.query.filter_by(title=blog_title.data).first()
-        if title_used is not None:
-            raise ValidationError('This title has already been used.')
+        if blog_title.data != self.original_title.data:
+            title_used = BlogPost.query.filter_by(title=blog_title.data).first()
+            if title_used is not None:
+                raise ValidationError('This title has already been used.')
 
 class PostForm(FlaskForm):
     post = TextAreaField('Create a note', validators=[DataRequired(message="Please don't leave this field blank.")])
