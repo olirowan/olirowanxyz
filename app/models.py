@@ -37,9 +37,9 @@ markdown_styles = [
 
 markdown_attributes = {
     "*": ["style", "class"],
-    "a": ["href"]
+    "a": ["href"],
+    "img": ["src"]
 }
-
 
 followers = db.Table(
     'followers',
